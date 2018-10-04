@@ -1,0 +1,21 @@
+.wrapper-capture {
+    display: flex
+}
+.wrapper-capture video {
+    height: 100%;
+}
+
+.wrapper-capture form {
+    position: absolute;
+    z-index: 9;
+    right: 0;
+    top: 0;
+    border-left: 0.05em solid #CCC;
+}
+.wrapper-capture form input, .wrapper-capture form button {
+    padding: 10px;
+    border: none;
+    background: #FFF;
+    border-right: 0.1em solid #CCC;
+    border-bottom: 0.1em solid #CCC;
+}

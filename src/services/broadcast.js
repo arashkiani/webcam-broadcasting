@@ -1,11 +1,11 @@
 import React from 'react';
 import Peer from 'peerjs';
-import './webRTC.css'
+import './broadcast.css'
 export class broadcast extends React.Component {
     state = {
         videoElements:{
-            width:400, 
-            height:300,
+            width:1920, 
+            height:1080,
         },
         peer: new Peer({key: 'lwjd5qra8257b9'})
     }
@@ -47,19 +47,18 @@ export class broadcast extends React.Component {
     draw(videoElements){
         const {ctx, video, width, height} = videoElements
         ctx.drawImage(video, 0, 0, width, height);
-        setTimeout(this.draw, 25, videoElements)
+        setTimeout(this.draw, 15, videoElements)
     }
 
 
     render() {
-        const {me} = this.state
-      return <React.Fragment>
-        <div>
-            <canvas ref="canvas" width="400" height="300"/>
-            <video ref="video" className="hide" width="400" height="300" autoPlay/>
-            <h1>Webcam: {me}</h1>
+        const {me, videoElements} = this.state
+        const {width, height} = videoElements
+        return <div className="broadcast">
+            <canvas ref="canvas" width={width} height={height} />
+            <video ref="video" autoPlay/>
+            <p>Your Code: {me}</p>
         </div>
-      </React.Fragment>
     }
   
   }

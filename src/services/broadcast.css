@@ -1,0 +1,13 @@
+.broadcast {
+    position: absolute;
+    right:0;
+    bottom: 0;
+    background: #FFF;
+    z-index: 99;
+}
+.broadcast video {
+    width: 250px;
+}
+.broadcast canvas{
+    display: none;
+}

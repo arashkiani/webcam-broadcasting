@@ -1,48 +1,50 @@
 import React from 'react';
 import Peer from 'peerjs';
-import './webRTC.css'
+import "./capture.css"
 export class Capture extends React.Component {
     state = {
         videoElements:{
-            width:400, 
-            height:300,
+            width:1680, 
+            height:1080,
         },
         peer: new Peer({key: 'lwjd5qra8257b9'})
     }
     componentDidMount(){
-        this.setState({stream: this.refs.stream})
+        this.setState({
+            stream: this.refs.stream
+        })
     }
     
     componentDidUpdate() {
         const {id, peer, stream} = this.state
-        console.log(this.state)
         if(id){
             peer.connect(id);
+            console.log('connect', id)
             peer.call()
         }
         peer.on('call', function(call) {
             call.answer();
             call.on('stream', function(remoteStream) {
-                console.log(remoteStream)
                 stream.srcObject = remoteStream
             });
         })
     }
 
     render() {
-      return <React.Fragment>
-            <video ref="stream" width="400" height="300" autoPlay/>
-            <h1>Streaming</h1>
+    const {width, height} = this.state.videoElements
+    console.log(width, height)
+      return <div className="wrapper-capture">
+            <video ref="stream" width={width} height={height} autoPlay/>
             <form onSubmit={(e)=>{
                 e.preventDefault()
                 this.setState(
                     {id:this.refs.to.value}
                 )
             }}>
-                <input ref="to" defaultValue="" />
+                <input placeholder="Enter Code here" ref="to" />
                 <button type="submit">Connect</button>
             </form>
-      </React.Fragment>
+      </div>
     }
   
   }
